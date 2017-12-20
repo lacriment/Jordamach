@@ -1,3 +1,3 @@
 # Jordamach
-Jordamach, graphical regression tool for econometrics. Yordamaç, görsel iktisadi yordam aracı.
+Jordamach, graphical regression tool. Yordamaç, görsel yordam aracı.
 ![alt text](screen_shot.png "Screenshot")
