@@ -1,18 +1,33 @@
+from math import log
 import numpy as np
 
 
 class Regrezio:
     """Base class for linear regression models"""
 
-    def __init__(self, model='linear'):
+    def __init__(self, model='lin'):
         # set the regression model
-        self.model = model
+        self.model = model.lower()
 
     def fit(self, x, y):
         """ Fits values to linear regression model and calculates
             coefficients and intercept """
         self.y = np.array(y)
         self.x = np.array(x)
+
+        # Calculate the lns of the values for function models
+        if self.model == 'log-lin':
+            self.y = np.array([[log(i[0])] for i in self.y])
+        elif self.model == 'log-log':
+            self.y = np.array([[log(i[0])] for i in self.y])
+            self.x = np.array([[log(cell) for cell in row] for row in self.x])
+        elif self.model == 'lin-log':
+            self.x = np.array([[log(cell) for cell in row] for row in self.x])
+        elif self.model == 'quadratic':
+            self.x = np.array([[xij[0], xij[0] ** 2] for xij in self.x])
+        elif self.model == 'lin' or self.model == 'lin-lin':
+            pass
+
         # insert ones to first column
         self.x1 = np.concatenate((np.ones((len(self.x), 1)), self.x), axis=1)
         # transpose of x
